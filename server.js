@@ -15,7 +15,10 @@ const sql = new mariasql({
 });
 
 const server_io = socket_io.listen(server);
+//////////////////
 
+
+/////////////////
 server_io.sockets.on('connection', function(socket)  {
   
   socket.on('Fetch',function() {

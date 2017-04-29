@@ -21,6 +21,8 @@ const server_io = socket_io.listen(server);
 /////////////////
 server_io.sockets.on('connection', function(socket)  {
   
+  socket.emit('ServerReady')
+
   socket.on('Fetch',function() {
     let q = 'select * from Data1 order by time desc limit 5 ;';
     sql.query(q, function(error,rows) {

@@ -1,0 +1,25 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "database: Lab2 </br> table: </br>   Data1 ( value double, time timestamp ) </br>   Data2 ( value double, time timestamp ) </br>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuemao/Lab2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cuemao/Lab2/issues"
+  },
+  "homepage": "https://github.com/cuemao/Lab2#readme",
+  "dependencies": {
+    "ambient-attx4": "^0.2.11",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3"
+  }
+}

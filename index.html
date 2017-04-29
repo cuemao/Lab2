@@ -22,10 +22,34 @@
     <div style="width:75%;">
         <canvas id="data2"></canvas>
     </div>
+     <fieldset>
+        <label>Sound Limit : </label> <input type="text" id ="SoundLimit"/>
+        <input type ="button" value="set" id="setSound" >
+        <br>
+        
+        <label>Light Limit : </label> <input type="text" id ="LightLimit"/>
+        <input type ="button" value="set" id="setLight" ><br>
+     </fieldset>
     
     <script>
-        const socket = io.connect();
         
+        var sdButton = document.getElementById("setSound")
+        var ltButton = document.getElementById("setLight")
+        var sdLimit = 0
+        var ltLimit = 0
+        sdButton.addEventListener("click",function(){
+            sdLimit = document.getElementById("SoundLimit").value;
+            config[0].data.datasets[1].data.fill(sdLimit)];
+            window.chart[0].update();
+        })
+
+        ltButton.addEventListener("click",function(){
+            ltLimit = document.getElementById("LightLimit").value;
+            config[1].data.datasets[1].data.fill(ltLimit)];
+            window.chart[0].update();
+        })
+
+        const socket = io.connect();
         const type = "line";
         const options = {
             animation: false,
@@ -65,12 +89,18 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: "Data1",
+                    label: "Sound Level",
                     backgroundColor: 'rgb(255,99,132)',
                     borderColor: 'rgb(255,99,132)',
                     data: [],
                     fill: false,
-                },]
+                },{
+                    label: "Sound Limit",
+                    backgroundColor: 'rgb(128,128,128)',
+                    borderColor: 'rgb(128,128,128)',
+                    data: Array(50).fill(sdLimit),
+                    fill: false,
+                }]
             },
             options: options, 
         },
@@ -79,12 +109,18 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: "Data2",
+                    label: "Light Level",
                     backgroundColor: 'rgb(54,162,235)',
                     borderColor: 'rgb(54,162,235)',
                     data: [],
                     fill: false,
-                },]
+                },{
+                    label: "Light Limit",
+                    backgroundColor: 'rgb(128,128,128)',
+                    borderColor: 'rgb(128,128,128)',
+                    data: Array(50).fill(ltLimit),
+                    fill: false,
+                }]
             },
             options: options, 
         }];

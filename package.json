@@ -1,7 +1,7 @@
 {
   "name": "lab2",
   "version": "1.0.0",
-  "description": "database: Lab2 </br> table: </br>   Data1 ( value double, time timestamp ) </br>   Data2 ( value double, time timestamp ) </br>",
+  "description": "dececting environment sound level and light level and act corresponding",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

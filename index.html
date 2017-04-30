@@ -33,19 +33,20 @@
     
     <script>
         
-        var sdButton = document.getElementById("setSound")
-        var ltButton = document.getElementById("setLight")
-        var sdLimit = 0
-        var ltLimit = 0
+        var sdButton = document.getElementById("setSound");
+        var ltButton = document.getElementById("setLight");
+        var sdLimit = 0;
+        var ltLimit = 0;
+        var patience = 5;
         sdButton.addEventListener("click",function(){
             sdLimit = document.getElementById("SoundLimit").value;
-            config[0].data.datasets[1].data.fill(sdLimit)];
+            config[0].data.datasets[1].data.fill(sdLimit);
             window.chart[0].update();
         })
 
         ltButton.addEventListener("click",function(){
             ltLimit = document.getElementById("LightLimit").value;
-            config[1].data.datasets[1].data.fill(ltLimit)];
+            config[1].data.datasets[1].data.fill(ltLimit);
             window.chart[0].update();
         })
 
@@ -154,6 +155,16 @@
                 config[i].data.labels = config[i].data.labels.slice(-50);
                 config[i].data.datasets[0].data = config[i].data.datasets[0].data.slice(-50);
                 window.chart[i].update();
+            }
+            if(Data.value[0]>sdLimit || Data.value[1]>ltLimit){
+                patience-=1;
+                if (!patience){
+                    socket.emit("Play");
+                    patience = 1;
+                }
+            }else{
+                socket.emit("Stop");
+                patience=5;
             }
         });
 

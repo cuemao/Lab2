@@ -1,11 +1,8 @@
-var tessel = require('tessel');
-var ambientlib = require('ambient-attx4');
-var ambient = ambientlib.use(tessel.port['A']);
-//var path = require('path');
-//var av = require('tessel-av');
-//var mp3 = path.join(__dirname, 'fairytale.mp3');
-//var sound = new av.Speaker(mp3);
-socket = require('socket.io-client')('http://localhost:3000');
+const tessel = require('tessel');
+const ambient = require('ambient-attx4').use(tessel.port['A']);
+const path = require('path');
+const av = require('tessel-av');
+const socket = require('socket.io-client')('http://localhost:3000');
 
 socket.on('ServerReady', function(){
    ambient.on('ready',function(){
@@ -24,7 +21,28 @@ socket.on('ServerReady', function(){
          socket.emit('Push',[sd,ld]);
       });
    },5000);
+   
    ambient.on('error', function(err){
       console.log(err);
    });
+
+
+});
+
+const sound = new av.Speaker(path.join(__dirname, 'Sherlock-TheGameIsOn.mp3'));
+var PlayStatus = false;
+
+socket.on('Play', function(){
+    if(!PlayStatus){
+        sound.play();
+        PlayStatus = true;
+    };
+});
+
+socket.on('Stop', function(){
+    sound.stop();
+});
+
+sound.on('empty',function(){
+    PlayStatus = false;
 });

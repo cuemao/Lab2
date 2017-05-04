@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cuemao/Lab2#readme",
   "dependencies": {
     "ambient-attx4": "^0.2.11",
+    "mariasql": "^0.2.6",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "tessel-av": "^0.16.4"

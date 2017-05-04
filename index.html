@@ -47,7 +47,7 @@
         ltButton.addEventListener("click",function(){
             ltLimit = document.getElementById("LightLimit").value;
             config[1].data.datasets[1].data.fill(ltLimit);
-            window.chart[0].update();
+            window.chart[1].update();
         })
 
         const socket = io.connect();
@@ -149,6 +149,7 @@
         });
         
         socket.on("Update", function(Data) {
+	    console.log(patience)
             for( i=0; i<config.length; ++i) {
                 config[i].data.labels.push(Data.time);
                 config[i].data.datasets[0].data.push(Data.value[i]);
@@ -159,11 +160,12 @@
             if(Data.value[0]>sdLimit || Data.value[1]>ltLimit){
                 patience-=1;
                 if (!patience){
-                    socket.emit("Play");
+                    socket.emit("HTMLPlay");
+		    console.log('html play');
                     patience = 1;
                 }
             }else{
-                socket.emit("Stop");
+                socket.emit("HTMLStop");
                 patience=5;
             }
         });

@@ -20,7 +20,7 @@ const server_io = socket_io.listen(server);
 
 /////////////////
 server_io.sockets.on('connection', function(socket)  {
-  
+  console.log('connect');  
   socket.emit('ServerReady')
 
   socket.on('Fetch',function() {
@@ -46,6 +46,16 @@ server_io.sockets.on('connection', function(socket)  {
       '-' + to2digits(date.getDate()) + ' ' + to2digits(date.getHours())+ ':' + 
       to2digits(date.getMinutes()) + ':' + to2digits(date.getSeconds());
     socket.broadcast.emit('Update', {value: Data, time: dateStr});
+  });
+
+  socket.on('HTMLPlay', function() {
+    console.log('server play');
+    socket.broadcast.emit('Play');
+  });
+
+  socket.on('HTMLStop', function() {
+    console.log('server stop');
+    socket.broadcast.emit('Stop');
   });
     
 });
